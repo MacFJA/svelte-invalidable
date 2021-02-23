@@ -1,0 +1,63 @@
+{
+  "name": "@macfja/svelte-invalidable",
+  "version": "1.0.0",
+  "description": "A Svelte that can be requested to update itself",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "src/",
+    "dist/",
+    "types",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@tsconfig/svelte": "^1.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "eslint": "^7.20.0",
+    "eslint-plugin-import": "^2.22.1",
+    "rollup": "^2.39.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "sirv-cli": "^1.0.11",
+    "svelte": "^3.32.3",
+    "svelte-check": "^1.1.35",
+    "svelte-preprocess": "^4.6.9",
+    "testcafe": "^1.11.0",
+    "tslib": "^2.1.0",
+    "typedoc": "^0.20.26",
+    "typedoc-plugin-pages": "^1.1.0",
+    "typescript": "^4.1.5"
+  },
+  "peerDependencies": {
+    "svelte": "^3.0"
+  },
+  "scripts": {
+    "doc": "typedoc src/index.ts",
+    "lint": "eslint src/",
+    "pretest": "rollup -c rollup.test.config.js",
+    "test": "testcafe opera tests/e2e.ts --app 'npx sirv tests'",
+    "prebuild": "tsc",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macfja/svelte-invalidable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/macfja/svelte-invalidable/issues"
+  },
+  "homepage": "https://github.com/macfja/svelte-invalidable#readme",
+  "author": "MacFJA",
+  "license": "MIT",
+  "types": "types/index.d.ts",
+  "keywords": [
+    "store",
+    "svelte",
+    "sveltejs"
+  ]
+}
