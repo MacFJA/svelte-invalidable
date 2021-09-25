@@ -46,11 +46,11 @@ name.invalidate()
 
 ```html
 <script>
-    import {invalidate, invalidable, pinvalidable} from "@macfja/svelte-invalidable"
-    import { writable, derived } from "svelte/store"
+    import { invalidate, invalidable, pinvalidable } from "@macfja/svelte-invalidable"
+    import { writable } from "svelte/store"
 
     let time = pinvalidable(writable("Never"), () => {
-        return fetch('http://worldtimeapi.org/api/timezone/Etc/UTC')
+        return fetch("https://worldtimeapi.org/api/timezone/Etc/UTC")
             .then(r => r.json())
             .then(r => r.datetime)
     })
@@ -59,18 +59,19 @@ name.invalidate()
         time.invalidate()
     }
 
+    const updating = time.isUpdating
     const values = [2, 7, 3, 5, 11, 13]
     let position = 0
     let data = invalidable(writable(2), () => values[(++position)%6])
 </script>
 
-<p>The last time the date was refresh is: {$time}</p>
-<button id="date-btn" on:click="{updateTime}">Do it now</button>
+<p>The last time the date was refresh is: {$time} {#if $updating}(Updating...){/if}</p>
+<button id="date-btn" on:click={updateTime}>Do it now</button>
 
 <hr />
 <var on:click={() => invalidate(data)}>prime number: {$data}</var>
 ```
-([REPL](https://svelte.dev/repl/6bb1981c0d1b413dbc32286fd04e37f8?version=3.32.3))
+([REPL](https://svelte.dev/repl/c2c2ad1e14d747fabf68b5a2e85bbf6a?version=3.43.0))
 
 ----
 

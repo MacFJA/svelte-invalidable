@@ -49,10 +49,10 @@ test("Invalidate with 'remote' computation", async t => {
     await t
         .click(shopCartButton)
         .expect(shopCartSubtotal.textContent).eql('20¤')
-        .expect(shopCartTotal.textContent).eql('20¤ (0¤ of discount)')
+        .expect(shopCartTotal.textContent).eql('20¤ (0¤ of discount)[updating...]')
         .expect(shopCartTotal.textContent).eql('16¤ (4¤ of discount)')
         .click(shopCartButton)
         .expect(shopCartSubtotal.textContent).eql('30¤')
-        .expect(shopCartTotal.textContent).eql('30¤ (0¤ of discount)')
+        .expect(shopCartTotal.textContent).eql('30¤ (0¤ of discount)[updating...]')
         .expect(shopCartTotal.textContent).eql('24¤ (6¤ of discount)')
 })

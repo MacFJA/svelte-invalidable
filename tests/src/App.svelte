@@ -21,6 +21,7 @@
         // Simulate long calculation + network access
         return new Promise(r => setTimeout(() => r(Math.round(quantity * 10 * 0.8)), 1000))
     })
+    const updating = price.isUpdating
     let discount = derived([price], ([finalPrice]) => {
         return (10 * quantity) - finalPrice
     })
@@ -53,5 +54,5 @@
     <dt>Subtotal</dt>
     <dd id="subtotal">{10 * quantity}¤</dd>
     <dt>Total</dt>
-    <dd id="total">{$price}¤ ({$discount}¤ of discount)</dd>
+    <dd id="total">{$price}¤ ({$discount}¤ of discount){#if $updating}[updating...]{/if}</dd>
 </dl>

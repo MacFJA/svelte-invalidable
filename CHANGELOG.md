@@ -6,9 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0]
+
+### Added
+
+- Add a store to know is a promise invalidation is running
+
+### Changed
+
+- (dev) Update dependencies
+
 ## [1.0.0]
 
 First version
 
-[Unreleased]: https://github.com/MacFJA/svelte-invalidable/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/MacFJA/svelte-invalidable/compare/1.1.0...HEAD
+[1.0.0]: https://github.com/MacFJA/svelte-invalidable/releases/tag/1.1.0
 [1.0.0]: https://github.com/MacFJA/svelte-invalidable/releases/tag/1.0.0

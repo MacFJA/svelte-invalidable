@@ -1,4 +1,5 @@
-import type { Writable } from "svelte/store"
+import type { Readable, Writable } from "svelte/store"
+import { writable } from "svelte/store"
 
 /**
  * A store that allow to be flagged as invalidated
@@ -8,6 +9,13 @@ export interface InvalidableStore<T> extends Writable<T> {
      * Invalidate the store value and request for fresh value
      */
     invalidate(): void
+}
+
+export interface InvalidablePromiseStore<T> extends InvalidableStore<T> {
+    /**
+     * Indicate if the store is updating its value
+     */
+    get isUpdating(): Readable<boolean>
 }
 
 /**
@@ -31,11 +39,19 @@ export function invalidable<T>(store: Writable<T>, updater: () => T):Invalidable
  * @param {Writable<*>} store The store to enhance
  * @param {function:*} updater The function to get a fresh value inside a promise
  */
-export function pinvalidable<T>(store: Writable<T>, updater: () => Promise<T>):InvalidableStore<T> {
+export function pinvalidable<T>(store: Writable<T>, updater: () => Promise<T>):InvalidablePromiseStore<T> {
+    const updating = writable(false)
     return {
         ...store,
         invalidate: () => {
-            updater().then(v => store.set(v))
+            updating.set(true)
+            updater().then(v => {
+                store.set(v)
+                updating.set(false)
+            })
+        },
+        get isUpdating(): Readable<boolean> {
+            return updating
         }
     }
 }
